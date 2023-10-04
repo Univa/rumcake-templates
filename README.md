@@ -1,12 +1,11 @@
-<!--toc:start-->
+# rumcake-templates
 
+<!--toc:start-->
 - [Template updates](#template-updates)
 - [Available templates](#available-templates)
   - [`rumcake-basic-template`](#rumcake-basic-template)
   - [`rumcake-split-template`](#rumcake-split-template)
   <!--toc:end-->
-
-# rumcake-templates
 
 A collection of templates to start building your rumcake firmware.
 
