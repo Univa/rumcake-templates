@@ -51,7 +51,7 @@ impl NRFBLECentralDevice for {{ keyboard-name }}Left {}
 
 // USB configuration
 use rumcake::usb::USBKeyboard;
-impl USBKeyboard for WingpairLeft {
+impl USBKeyboard for {{ keyboard-name }}Left {
     const USB_VID: u16 = 0x0000; // TODO: Change this
     const USB_PID: u16 = 0x0000; // TODO: Change this
 }
