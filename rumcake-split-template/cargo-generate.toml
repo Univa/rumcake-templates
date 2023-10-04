@@ -1,0 +1,6 @@
+[placeholders.keyboard-name]
+type = "string"
+prompt = "What is the name of your keyboard (alphanumeric, no spaces, first letter capital)?"
+default = "MyKeyboard"
+regex = "^[A-Z][0-9a-zA-Z_]*$"
+
