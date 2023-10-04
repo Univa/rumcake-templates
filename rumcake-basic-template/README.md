@@ -21,7 +21,7 @@ This template builds a firmware for a keyboard that has:
 
 ## Toolchain requirements
 
-This template assumes that you have `rustup` and `cargo` available in your `$PATH`.
+This template assumes that you have `rustup` and `cargo` available in your `$PATH`, and that you have the latest `nightly` Rust toolchain.
 
 ### Target
 
