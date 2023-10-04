@@ -47,7 +47,11 @@ impl NRFBluetoothKeyboard for {{ keyboard-name }}Left {
 
 // Split keyboard setup
 use rumcake::split::drivers::nrf_ble::central::NRFBLECentralDevice;
-impl NRFBLECentralDevice for {{ keyboard-name }}Left {}
+impl NRFBLECentralDevice for {{ keyboard-name }}Left {
+    // Only one peripheral is supported for now
+    const BLUETOOTH_ADDRESS: [u8; 6] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this
+    const PERIPHERAL_ADDRESSES: [u8; 6] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this, must contain the address for the right half.
+}
 
 // USB configuration
 use rumcake::usb::USBKeyboard;
