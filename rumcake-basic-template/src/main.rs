@@ -46,6 +46,11 @@ impl Keyboard for {{ keyboard-name }} {
     const PRODUCT: &'static str = "{{ keyboard-name }}";
     const SERIAL_NUMBER: &'static str = "1"; // TODO: Change this
 
+}
+
+// Layout configuration
+use rumcake::keyboard::KeyboardLayout;
+impl KeyboardLayout for {{ keyboard-name }} {
     // Use the remapping above to create the keyboard layout
     remap! {
         build_layout! {

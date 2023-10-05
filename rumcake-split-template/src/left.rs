@@ -19,8 +19,11 @@ use rumcake::keyboard::Keyboard;
 impl Keyboard for {{ keyboard-name }}Left {
     const MANUFACTURER: &'static str = ""; // TODO: Change this
     const PRODUCT: &'static str = "{{ keyboard-name }}";
+}
 
-    // Use the remapping above to create the keyboard layout
+// Layout configuration
+use rumcake::keyboard::KeyboardLayout;
+impl KeyboardLayout for {{ keyboard-name }}Left {
     build_layout! {
         {
             [ Escape Q  W  E R      T    Y      U     I O  P  '['  ]
@@ -30,6 +33,8 @@ impl Keyboard for {{ keyboard-name }}Left {
         }
     }
 }
+
+// Matrix configuration
 use rumcake::keyboard::KeyboardMatrix;
 impl KeyboardMatrix for {{ keyboard-name }}Left {
     build_matrix! {
