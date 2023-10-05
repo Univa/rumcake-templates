@@ -27,7 +27,7 @@ impl KeyboardMatrix for {{ keyboard-name }}Right {
         // to the proper coordinates on the layout
 
         // We flip the column numbers because this is a single PCB design, flipped
-        ((col).abs_diff(6), row)
+        ((col).abs_diff(5), row)
     }
 }
 
