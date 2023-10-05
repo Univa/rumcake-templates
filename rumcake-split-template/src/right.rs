@@ -21,6 +21,14 @@ impl KeyboardMatrix for {{ keyboard-name }}Right {
         { P0_22 P1_00 P0_11 P1_04 } // Rows
         { P0_09 P0_10 P1_11 P1_13 P1_15 P0_02 } // Columns
     }
+
+    fn remap_to_layout(col: u8, row: u8) -> (u8, u8) {
+        // Since the layout is stored on the central device, we need to remap the matrix events
+        // to the proper coordinates on the layout
+
+        // We flip the column numbers because this is a single PCB design, flipped
+        ((col).abs_diff(6), row)
+    }
 }
 
 // Split keyboard setup
