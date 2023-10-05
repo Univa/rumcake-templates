@@ -11,7 +11,7 @@ cortex-m = { version = "0.7.6" }
 cortex-m-rt = "0.7.0"
 embassy-executor = { git = "https://github.com/embassy-rs/embassy" }
 
-rumcake = { git = "https://github.com/Univa/rumcake", rev = "b3030e6", features = ["nrf52840", "split-driver-ble", "nrf-ble"] }
+rumcake = { git = "https://github.com/Univa/rumcake", rev = "c8bd8d0", features = ["nrf52840", "split-driver-ble", "nrf-ble"] }
 
 [profile.dev]
 debug = 2
