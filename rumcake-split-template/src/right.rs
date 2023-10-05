@@ -15,6 +15,13 @@ use rumcake::{build_layout, build_matrix};
 #[keyboard]
 pub struct {{ keyboard-name }}Right;
 
+use rumcake::keyboard::Keyboard;
+impl Keyboard for {{ keyboard-name }}Right {
+    // Needed for advertising data (Bluetooth GAP)
+    const MANUFACTURER: &'static str = ""; // TODO: Change this
+    const PRODUCT: &'static str = "{{ keyboard-name }}";
+}
+
 // Since this is a peripheral device, this only needs a matrix
 impl KeyboardMatrix for {{ keyboard-name }}Right {
     build_matrix! {
