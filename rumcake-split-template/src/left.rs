@@ -22,7 +22,9 @@ impl Keyboard for {{ keyboard-name }}Left {
 }
 
 // Layout configuration
-use rumcake::keyboard::KeyboardLayout;
+use rumcake::keyberon::action::Action::*;
+use rumcake::keyboard::{KeyboardLayout, Keycode::*};
+use rumcake::nrf_ble::BluetoothCommand::*;
 impl KeyboardLayout for {{ keyboard-name }}Left {
     build_layout! {
         {
@@ -30,6 +32,18 @@ impl KeyboardLayout for {{ keyboard-name }}Left {
             [ Tab    A  S  D F      G    H      J     K L  ;  '\'' ]
             [ LCtrl  Z  X  C V      B    N      M     , .  /  ']'  ]
             [ No     No No 1 LShift LAlt BSpace Space 2 No No No   ]
+        }
+        {
+            [ LGui                           F1 F2 F3 F4 F5 F6      F7     F8   F9    F10 F11 ]
+            [ t                              t  t  t  t  t  Left    Down   Up   Right t   t   ]
+            [ {Custom(Bluetooth(ToggleUSB))} t  t  t  t  t  Home    PgDown PgUp End   t   F12 ]
+            [ t                              t  t  t  t  t  PScreen Enter  t    t     t   t   ]
+        }
+        {
+            [ t   1 2 3 4 5      6 7 8 9 0    '(' ]
+            [ t   t t t t t      - = t t t    t   ]
+            [ '`' t t t t t      t t t t '\\' ')' ]
+            [ t   t t t t Delete t t t t t    t   ]
         }
     }
 }
