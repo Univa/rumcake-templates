@@ -12,7 +12,7 @@ cortex-m = { version = "0.7.6", features = ["critical-section-single-core"] }
 cortex-m-rt = "0.7.0"
 embassy-executor = { git = "https://github.com/embassy-rs/embassy" }
 
-rumcake = { git = "https://github.com/Univa/rumcake", rev = "5df5e27", features = ["stm32f303cb", "via", "underglow-driver-ws2812-bitbang"] }
+rumcake = { git = "https://github.com/Univa/rumcake", rev = "3b72522", features = ["stm32f303cb", "via", "underglow-driver-ws2812-bitbang"] }
 
 [build-dependencies]
 rust-lzma = "0.6.0"
