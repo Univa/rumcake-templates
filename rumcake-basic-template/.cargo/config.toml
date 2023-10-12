@@ -8,7 +8,7 @@ runner = [
 ]
 
 [build]
-target = "thumbv6m-none-eabi"
+target = "thumbv7em-none-eabihf"
 rustflags = ["-Z", "macro-backtrace"]
 
 [env]
