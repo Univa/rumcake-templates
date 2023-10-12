@@ -11,7 +11,7 @@ use rumcake::keyberon;
 use rumcake::keyboard;
 use rumcake::{build_layout, build_matrix};
 
-#[keyboard]
+#[keyboard(usb, bluetooth, split_central = "ble")]
 pub struct {{ keyboard-name }}Left;
 
 // Basic keyboard configuration
@@ -22,9 +22,9 @@ impl Keyboard for {{ keyboard-name }}Left {
 }
 
 // Layout configuration
+use rumcake::bluetooth::BluetoothCommand::*;
 use rumcake::keyberon::action::Action::*;
 use rumcake::keyboard::{KeyboardLayout, Keycode::*};
-use rumcake::nrf_ble::BluetoothCommand::*;
 impl KeyboardLayout for {{ keyboard-name }}Left {
     build_layout! {
         {
@@ -58,17 +58,20 @@ impl KeyboardMatrix for {{ keyboard-name }}Left {
 }
 
 // Bluetooth configuration
-use rumcake::nrf_ble::NRFBluetoothKeyboard;
-impl NRFBluetoothKeyboard for {{ keyboard-name }}Left {
+use rumcake::hw::mcu::BluetoothDevice;
+impl BluetoothDevice for {{ keyboard-name }}Left {
+    const BLUETOOTH_ADDRESS: [u8; 6] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this
+}
+
+use rumcake::bluetooth::BluetoothKeyboard;
+impl BluetoothKeyboard for {{ keyboard-name }}Left {
     const BLE_VID: u16 = 0x0000; // TODO: Change this
     const BLE_PID: u16 = 0x0000; // TODO: Change this
 }
 
 // Split keyboard setup
-use rumcake::split::drivers::nrf_ble::central::NRFBLECentralDevice;
+use rumcake::drivers::nrf_ble::central::NRFBLECentralDevice;
 impl NRFBLECentralDevice<1> for {{ keyboard-name }}Left {
-    // Only one peripheral is supported for now
-    const BLUETOOTH_ADDRESS: [u8; 6] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this
     const PERIPHERAL_ADDRESSES: [[u8; 6]; 1] = [[0x00, 0x00, 0x00, 0x00, 0x00, 0x00]]; // TODO: Change this, must contain the address for the right half.
 }
 

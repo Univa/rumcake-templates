@@ -9,9 +9,9 @@ defmt-rtt = "0.4"
 panic-probe = { version = "0.3", features = ["print-defmt"] }
 cortex-m = { version = "0.7.6" }
 cortex-m-rt = "0.7.0"
-embassy-executor = { git = "https://github.com/embassy-rs/embassy" }
+embassy-executor = { git = "https://github.com/embassy-rs/embassy", rev = "b1abaa38" }
 
-rumcake = { git = "https://github.com/Univa/rumcake", rev = "3b72522", features = ["nrf52840", "split-driver-ble", "nrf-ble"] }
+rumcake = { git = "https://github.com/Univa/rumcake", rev = "1f2da71", features = ["nrf52840", "drivers", "nrf-ble"] }
 
 [profile.dev]
 debug = 2

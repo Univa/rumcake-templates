@@ -11,7 +11,7 @@ use rumcake::keyberon;
 use rumcake::keyboard;
 use rumcake::{build_layout, build_matrix, remap_matrix, ws2812_pin};
 
-#[keyboard]
+#[keyboard(usb, underglow = "ws2812_bitbang")]
 pub struct {{ keyboard-name }};
 
 // This keyboard's PCB uses a duplex matrix.
@@ -87,12 +87,12 @@ impl KeyboardWithEEPROM for {{ keyboard-name }} {}
 use rumcake::via::ViaKeyboard;
 impl ViaKeyboard for {{ keyboard-name }} {}
 
-// Underglow configuration
-use rumcake::underglow::drivers::ws2812_bitbang::WS2812BitbangUnderglowDriver;
+// Underglow configuration + driver
 use rumcake::underglow::UnderglowDevice;
 impl UnderglowDevice for {{ keyboard-name }} {
     const NUM_LEDS: usize = 18; // TODO: Change this
 }
+use rumcake::drivers::ws2812_bitbang::underglow::WS2812BitbangUnderglowDriver;
 impl WS2812BitbangUnderglowDriver for {{ keyboard-name }} {
     ws2812_pin! { PA10 } // TODO: Change this
 }

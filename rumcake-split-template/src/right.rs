@@ -12,7 +12,7 @@ use rumcake::keyboard;
 use rumcake::keyboard::KeyboardMatrix;
 use rumcake::{build_layout, build_matrix};
 
-#[keyboard]
+#[keyboard(split_peripheral = "ble")]
 pub struct {{ keyboard-name }}Right;
 
 use rumcake::keyboard::Keyboard;
@@ -37,9 +37,14 @@ impl KeyboardMatrix for {{ keyboard-name }}Right {
     }
 }
 
-// Split keyboard setup
-use rumcake::split::drivers::nrf_ble::peripheral::NRFBLEPeripheralDevice;
-impl NRFBLEPeripheralDevice for {{ keyboard-name }}Right {
+// Bluetooth configuration
+use rumcake::hw::mcu::BluetoothDevice;
+impl BluetoothDevice for {{ keyboard-name }}Right {
     const BLUETOOTH_ADDRESS: [u8; 6] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this
+}
+
+// Split keyboard setup
+use rumcake::drivers::nrf_ble::peripheral::NRFBLEPeripheralDevice;
+impl NRFBLEPeripheralDevice for {{ keyboard-name }}Right {
     const CENTRAL_ADDRESS: [u8; 6] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this, must match the left half's BLUETOOTH_ADDRESS
 }
