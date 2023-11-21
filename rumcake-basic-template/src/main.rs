@@ -5,13 +5,19 @@
 #![feature(generic_const_exprs)]
 #![feature(return_position_impl_trait_in_trait)]
 
+// TODO: Add your `definition.json` file to the `src` folder.
+// _generated.rs is generated at build time, and will contain a serialized version of your Vial definition file to be compiled into your firmware.
+// This file won't be generated if you don't specify the "vial" feature flag for rumcake.
+#[cfg(vial)]
+include!(concat!(env!("OUT_DIR"), "/_generated.rs"));
+
 use defmt_rtt as _;
 use panic_probe as _;
 use rumcake::keyberon;
 use rumcake::keyboard;
 use rumcake::{build_layout, build_matrix, remap_matrix, ws2812_pin};
 
-#[keyboard(usb, underglow = "ws2812_bitbang")]
+#[keyboard(usb, underglow = "ws2812_bitbang", vial)]
 pub struct {{ keyboard-name }};
 
 // This keyboard's PCB uses a duplex matrix.
@@ -82,12 +88,23 @@ impl USBKeyboard for {{ keyboard-name }}  {
 }
 
 // Via configuration
-use rumcake::eeprom::KeyboardWithEEPROM;
-impl KeyboardWithEEPROM for {{ keyboard-name }} {}
+// Note: since the `storage` feature flag is not enabled, changes to your keyboard in the Vial app will not be saved. If you use `storage`, be sure to update memory.x.
 use rumcake::via::ViaKeyboard;
-impl ViaKeyboard for {{ keyboard-name }} {}
+impl ViaKeyboard for {{ keyboard-name }} {
+    // Uncomment if using `storage`
+    // rumcake::setup_via_storage_buffers!({{ keyboard-name }});
+}
+use rumcake::vial::VialKeyboard;
+impl VialKeyboard for {{ keyboard-name }} {
+    const VIAL_KEYBOARD_UID: [u8; 8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this
+    const VIAL_UNLOCK_COMBO: &'static [(u8, u8)] = &[(0, 0)]; // TODO: Change this
+    const KEYBOARD_DEFINITION: &'static [u8] = &GENERATED_KEYBOARD_DEFINITION;
+    // Uncomment if using `storage`
+    // rumcake::setup_vial_storage_buffers!({{ keyboard-name }});
+}
 
 // Underglow configuration + driver
+// Note: since the `storage` feature flag is not enabled, changes to the underglow config (e.g. brightness, current effect, etc.) will not be saved. If you use `storage`, be sure to update memory.x.
 use rumcake::underglow::UnderglowDevice;
 impl UnderglowDevice for {{ keyboard-name }} {
     const NUM_LEDS: usize = 18; // TODO: Change this

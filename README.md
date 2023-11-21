@@ -1,6 +1,7 @@
 # rumcake-templates
 
 <!--toc:start-->
+
 - [Template updates](#template-updates)
 - [Available templates](#available-templates)
   - [`rumcake-basic-template`](#rumcake-basic-template)
@@ -34,13 +35,17 @@ Template for a basic keyboard with underglow and a duplex matrix, with the follo
 - USB host communication
 - WS2812 Underglow
 - Duplex Matrix
-- Via
+- Vial
+
+Note: storage feature is disabled by default to reduce binary size, so Vial and underglow changes will not be
+saved. See the [storage doc](https://github.com/Univa/rumcake/blob/main/docs/feature-storage.md) for information
+on how to implement this.
 
 ## `rumcake-split-template`
 
 ![image](https://github.com/Univa/rumcake-templates/assets/41708691/e2bc9e90-3b6a-459f-970c-278bcc45ef7c)
 
-Template for a split keyboard with a left and right half, no dongle. No OLED display support yet.
+Template for a split keyboard with a left and right half, no dongle.
 
 - nRF52840 on both MCUs
 - Bluetooth host communication
