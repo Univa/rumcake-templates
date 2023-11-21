@@ -11,7 +11,7 @@ use rumcake::keyberon;
 use rumcake::keyboard;
 use rumcake::{build_layout, build_matrix};
 
-#[keyboard(usb, bluetooth, split_central = "ble")]
+#[keyboard(usb, bluetooth, split_central(driver = "ble"))]
 pub struct {{ keyboard-name }}Left;
 
 // Basic keyboard configuration

@@ -17,7 +17,7 @@ use rumcake::keyberon;
 use rumcake::keyboard;
 use rumcake::{build_layout, build_matrix, remap_matrix, ws2812_pin};
 
-#[keyboard(usb, underglow = "ws2812_bitbang", vial)]
+#[keyboard(usb, underglow(driver = "ws2812_bitbang"), vial)]
 pub struct {{ keyboard-name }};
 
 // This keyboard's PCB uses a duplex matrix.

@@ -12,7 +12,7 @@ use rumcake::keyboard;
 use rumcake::keyboard::KeyboardMatrix;
 use rumcake::{build_layout, build_matrix};
 
-#[keyboard(split_peripheral = "ble")]
+#[keyboard(split_peripheral(driver = "ble"))]
 pub struct {{ keyboard-name }}Right;
 
 use rumcake::keyboard::Keyboard;
