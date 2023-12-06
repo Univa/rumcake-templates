@@ -3,7 +3,6 @@
 #![feature(macro_metavar_expr)]
 #![feature(type_alias_impl_trait)]
 #![feature(generic_const_exprs)]
-#![feature(return_position_impl_trait_in_trait)]
 
 use defmt_rtt as _;
 use panic_probe as _;

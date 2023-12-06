@@ -55,7 +55,7 @@ rustup component add llvm-tools-preview
 Then, you can build your firmware:
 
 ```bash
-cargo objcopy --release -- -O binary keyboard.bin
+cargo objcopy --release -- -O binary firmware.bin
 ```
 
 Then, flash it to your keyboard (make sure it is in DFU mode already):

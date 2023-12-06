@@ -3,7 +3,6 @@
 #![feature(macro_metavar_expr)]
 #![feature(type_alias_impl_trait)]
 #![feature(generic_const_exprs)]
-#![feature(return_position_impl_trait_in_trait)]
 
 use defmt_rtt as _;
 use panic_probe as _;
@@ -23,7 +22,7 @@ impl Keyboard for {{ keyboard-name }}Left {
 
 // Layout configuration
 use rumcake::bluetooth::BluetoothCommand::*;
-use rumcake::keyberon::action::Action::*;
+use rumcake::keyberon::action::{Action::Custom, Action::*};
 use rumcake::keyboard::{KeyboardLayout, Keycode::*};
 impl KeyboardLayout for {{ keyboard-name }}Left {
     build_layout! {
@@ -34,10 +33,10 @@ impl KeyboardLayout for {{ keyboard-name }}Left {
             [ No     No No 1 LShift LAlt BSpace Space 2 No No No   ]
         }
         {
-            [ LGui                           F1 F2 F3 F4 F5 F6      F7     F8   F9    F10 F11 ]
-            [ t                              t  t  t  t  t  Left    Down   Up   Right t   t   ]
-            [ {Custom(Bluetooth(ToggleUSB))} t  t  t  t  t  Home    PgDown PgUp End   t   F12 ]
-            [ t                              t  t  t  t  t  PScreen Enter  t    t     t   t   ]
+            [ LGui                              F1 F2 F3 F4 F5 F6      F7     F8   F9    F10 F11 ]
+            [ t                                 t  t  t  t  t  Left    Down   Up   Right t   t   ]
+            [ {Custom(Bluetooth(ToggleOutput))} t  t  t  t  t  Home    PgDown PgUp End   t   F12 ]
+            [ t                                 t  t  t  t  t  PScreen Enter  t    t     t   t   ]
         }
         {
             [ t   1 2 3 4 5      6 7 8 9 0    '(' ]
@@ -72,7 +71,7 @@ impl BluetoothKeyboard for {{ keyboard-name }}Left {
 // Split keyboard setup
 use rumcake::drivers::nrf_ble::central::NRFBLECentralDevice;
 impl NRFBLECentralDevice for {{ keyboard-name }}Left {
-    const PERIPHERAL_ADDRESSES: &'static [[u8; 6]] = [[0x00, 0x00, 0x00, 0x00, 0x00, 0x00]]; // TODO: Change this, must contain the address for the right half.
+    const PERIPHERAL_ADDRESSES: &'static [[u8; 6]] = &[[0x00, 0x00, 0x00, 0x00, 0x00, 0x00]]; // TODO: Change this, must contain the address for the right half.
 }
 
 // USB configuration

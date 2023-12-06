@@ -1,0 +1,32 @@
+name: Build all templates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*-template/**"
+      - ".github/workflows/build.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        template: ["rumcake-basic-template", "rumcake-split-template"]
+
+    name: Build template
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install cargo-binutils and cargo-generate
+        run: cargo install cargo-binutils cargo-generate
+
+      - name: Generate template
+        run: cargo generate --path . ./${{ matrix.template }} --name ci-template-test --template-values-file="./.github/values/template-values.toml"
+
+      - name: Build binary
+        run: ./build.sh
+        working-directory: ./ci-template-test

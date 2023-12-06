@@ -3,9 +3,8 @@
 #![feature(macro_metavar_expr)]
 #![feature(type_alias_impl_trait)]
 #![feature(generic_const_exprs)]
-#![feature(return_position_impl_trait_in_trait)]
 
-// TODO: Add your `definition.json` file to the `src` folder.
+// TODO: Edit the `definition.json` file in the `src` folder to match your keyboard.
 // _generated.rs is generated at build time, and will contain a serialized version of your Vial definition file to be compiled into your firmware.
 // This file won't be generated if you don't specify the "vial" feature flag for rumcake.
 #[cfg(vial)]
