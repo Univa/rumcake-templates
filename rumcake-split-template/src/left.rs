@@ -69,8 +69,7 @@ impl BluetoothKeyboard for {{ keyboard-name }}Left {
 }
 
 // Split keyboard setup
-use rumcake::drivers::nrf_ble::central::NRFBLECentralDevice;
-impl NRFBLECentralDevice for {{ keyboard-name }}Left {
+impl NRFBLECentralDriverSettings for {{ keyboard-name }}Left {
     const PERIPHERAL_ADDRESSES: &'static [[u8; 6]] = &[[0x00, 0x00, 0x00, 0x00, 0x00, 0x00]]; // TODO: Change this, must contain the address for the right half.
 }
 

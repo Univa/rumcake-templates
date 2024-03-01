@@ -86,20 +86,19 @@ impl USBKeyboard for {{ keyboard-name }}  {
     const USB_PID: u16 = 0x0000; // TODO:: Change this
 }
 
+// Storage configuration, uncomment after enabling the `storage` feature flag
+// use rumcake::storage::StorageDevice;
+// impl StorageDevice for {{ keyboard-name }} {}
+
 // Via configuration
 // Note: since the `storage` feature flag is not enabled, changes to your keyboard in the Vial app will not be saved. If you use `storage`, be sure to update memory.x.
 use rumcake::via::ViaKeyboard;
-impl ViaKeyboard for {{ keyboard-name }} {
-    // Uncomment if using `storage`
-    // rumcake::setup_via_storage_buffers!({{ keyboard-name }});
-}
+impl ViaKeyboard for {{ keyboard-name }} {}
 use rumcake::vial::VialKeyboard;
 impl VialKeyboard for {{ keyboard-name }} {
     const VIAL_KEYBOARD_UID: [u8; 8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this
     const VIAL_UNLOCK_COMBO: &'static [(u8, u8)] = &[(0, 0)]; // TODO: Change this
     const KEYBOARD_DEFINITION: &'static [u8] = &GENERATED_KEYBOARD_DEFINITION;
-    // Uncomment if using `storage`
-    // rumcake::setup_vial_storage_buffers!({{ keyboard-name }});
 }
 
 // Underglow configuration + driver
@@ -108,8 +107,8 @@ use rumcake::underglow::UnderglowDevice;
 impl UnderglowDevice for {{ keyboard-name }} {
     const NUM_LEDS: usize = 18; // TODO: Change this
 }
-use rumcake::drivers::ws2812_bitbang::underglow::WS2812BitbangUnderglowDriver;
-impl WS2812BitbangUnderglowDriver for {{ keyboard-name }} {
-    ws2812_pin! { PA10 } // TODO: Change this
+use rumcake::drivers::ws2812_bitbang::ws2812_bitbang_pin;
+impl WS2812BitbangDriverSettings for {{ keyboard-name }} {
+    ws2812_bitbang_pin! { PA10 } // TODO: Change this
 }
 
