@@ -25,17 +25,17 @@ This template assumes that you have `rustup` and `cargo` available in your `$PAT
 
 ### Target
 
-Since this keyboard uses an STM32F303CBx, we need to add the `thumbv6m-none-eabi` target to our rust toolchain.
+Since this keyboard uses an STM32F303CBx, we need to add the `thumbv7em-none-eabihf` target to our rust toolchain.
 
 ```bash
-rustup target add thumbv6m-none-eabi
+rustup target add thumbv7em-none-eabihf
 ```
 
 ## Building and Flashing
 
 The following instructions are specific to this MCU (STM32F303CBx).
 
-Note that `.cargo/config.toml` specifies `thumbv6m-none-eabi` as our build target.
+Note that `.cargo/config.toml` specifies `thumbv7em-none-eabihf` as our build target.
 
 ### With a probe (e.g. ST-LINK or J-LINK)
 
