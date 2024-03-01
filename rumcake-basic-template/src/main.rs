@@ -14,7 +14,7 @@ use defmt_rtt as _;
 use panic_probe as _;
 use rumcake::keyberon;
 use rumcake::keyboard;
-use rumcake::{build_layout, build_matrix, remap_matrix, ws2812_pin};
+use rumcake::keyboard::{build_layout, build_matrix, remap_matrix};
 
 #[keyboard(usb, underglow(driver = "ws2812_bitbang"), vial)]
 pub struct {{ keyboard-name }};

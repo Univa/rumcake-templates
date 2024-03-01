@@ -8,7 +8,7 @@ use defmt_rtt as _;
 use panic_probe as _;
 use rumcake::keyberon;
 use rumcake::keyboard;
-use rumcake::{build_layout, build_matrix};
+use rumcake::keyboard::{build_layout, build_matrix};
 
 #[keyboard(usb, bluetooth, split_central(driver = "ble"))]
 pub struct {{ keyboard-name }}Left;
