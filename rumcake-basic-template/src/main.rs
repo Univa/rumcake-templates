@@ -14,7 +14,7 @@ use defmt_rtt as _;
 use panic_probe as _;
 use rumcake::keyberon;
 use rumcake::keyboard;
-use rumcake::keyboard::{build_layout, build_matrix, remap_matrix};
+use rumcake::keyboard::{build_layout, build_standard_matrix, remap_matrix};
 
 #[keyboard(usb, underglow(driver = "ws2812_bitbang"), vial)]
 pub struct {{ keyboard-name }};
@@ -73,7 +73,7 @@ impl KeyboardLayout for {{ keyboard-name }} {
 // Matrix configuration
 use rumcake::keyboard::KeyboardMatrix;
 impl KeyboardMatrix for {{ keyboard-name }} {
-    build_matrix! {
+    build_standard_matrix! {
         { PB3 PB4 PA15 PB5 PA0 PA1 PB10 PB11 PA2 PA3 } // Rows
         { PB12 PB2 PB1 PB0 PA7 PA6 PA5 PA4 } // Columns
     }

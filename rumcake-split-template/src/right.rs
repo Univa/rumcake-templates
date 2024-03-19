@@ -8,7 +8,7 @@ use defmt_rtt as _;
 use panic_probe as _;
 use rumcake::keyberon;
 use rumcake::keyboard;
-use rumcake::keyboard::{build_layout, build_matrix};
+use rumcake::keyboard::{build_layout, build_standard_matrix};
 
 #[keyboard(split_peripheral(driver = "ble"))]
 pub struct {{ keyboard-name }}Right;
@@ -23,7 +23,7 @@ impl Keyboard for {{ keyboard-name }}Right {
 // Since this is a peripheral device, this only needs a matrix
 use rumcake::keyboard::KeyboardMatrix;
 impl KeyboardMatrix for {{ keyboard-name }}Right {
-    build_matrix! {
+    build_standard_matrix! {
         { P0_22 P1_00 P0_11 P1_04 } // Rows
         { P0_09 P0_10 P1_11 P1_13 P1_15 P0_02 } // Columns
     }

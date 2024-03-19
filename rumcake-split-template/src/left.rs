@@ -8,7 +8,7 @@ use defmt_rtt as _;
 use panic_probe as _;
 use rumcake::keyberon;
 use rumcake::keyboard;
-use rumcake::keyboard::{build_layout, build_matrix};
+use rumcake::keyboard::{build_layout, build_standard_matrix};
 
 #[keyboard(usb, bluetooth, split_central(driver = "ble"))]
 pub struct {{ keyboard-name }}Left;
@@ -50,7 +50,7 @@ impl KeyboardLayout for {{ keyboard-name }}Left {
 // Matrix configuration
 use rumcake::keyboard::KeyboardMatrix;
 impl KeyboardMatrix for {{ keyboard-name }}Left {
-    build_matrix! {
+    build_standard_matrix! {
         { P0_02 P1_13 P1_11 P0_10 } // Rows
         { P0_22 P0_24 P1_00 P0_11 P1_04 P1_06 } // Columns
     }
