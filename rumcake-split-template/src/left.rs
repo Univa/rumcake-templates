@@ -10,7 +10,14 @@ use rumcake::keyberon;
 use rumcake::keyboard;
 use rumcake::keyboard::{build_layout, build_standard_matrix};
 
-#[keyboard(usb, bluetooth, split_central(driver = "ble"))]
+#[keyboard(
+    usb,
+    bluetooth,
+    split_central(
+        driver_setup_fn = setup_nrf_ble,
+        driver_type = "nrf-ble"
+    )
+)]
 pub struct {{ keyboard-name }}Left;
 
 // Basic keyboard configuration
@@ -50,9 +57,11 @@ impl KeyboardLayout for {{ keyboard-name }}Left {
 // Matrix configuration
 use rumcake::keyboard::KeyboardMatrix;
 impl KeyboardMatrix for {{ keyboard-name }}Left {
+    type Layout = Self; // send matrix events from this half's matrix to the layout
+
     build_standard_matrix! {
-        { P0_02 P1_13 P1_11 P0_10 } // Rows
-        { P0_22 P0_24 P1_00 P0_11 P1_04 P1_06 } // Columns
+        rows: [ P0_02 P1_13 P1_11 P0_10 ], // Rows
+        cols: [ P0_22 P0_24 P1_00 P0_11 P1_04 P1_06 ] // Columns
     }
 }
 
@@ -69,8 +78,15 @@ impl BluetoothKeyboard for {{ keyboard-name }}Left {
 }
 
 // Split keyboard setup
-impl NRFBLECentralDriverSettings for {{ keyboard-name }}Left {
-    const PERIPHERAL_ADDRESSES: &'static [[u8; 6]] = &[[0x00, 0x00, 0x00, 0x00, 0x00, 0x00]]; // TODO: Change this, must contain the address for the right half.
+use rumcake::split::central::{CentralDevice, CentralDeviceDriver};
+use rumcake::drivers::nrf_ble::central::setup_nrf_ble_split_central;
+impl CentralDevice for {{ keyboard-name }}Left {
+    type Layout = Self; // send matrix events from peripherals to the implemented layout
+}
+async fn setup_nrf_ble() -> (impl CentralDeviceDriver, &'static [[u8; 6]]) {
+    setup_nrf_ble_split_central! {
+        peripheral_addresses: [[0x00, 0x00, 0x00, 0x00, 0x00, 0x00]], // TODO: Change this, must contain the address for the right half.
+    }
 }
 
 // USB configuration
