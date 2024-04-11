@@ -22,7 +22,9 @@ use rumcake::keyboard::{build_layout, build_standard_matrix, remap_matrix};
         id = {{ keyboard-name }}Lighting,
         driver_setup_fn = setup_underglow
     ),
-    vial
+    vial(
+        id = {{ keyboard-name }}Via,
+    )
 )]
 pub struct {{ keyboard-name }};
 
@@ -101,10 +103,11 @@ impl USBKeyboard for {{ keyboard-name }}  {
 
 // Via configuration
 // Note: since the `storage` feature flag is not enabled, changes to your keyboard in the Vial app will not be saved. If you use `storage`, be sure to update memory.x.
+struct {{ keyboard-name }}Via;
 use rumcake::via::ViaKeyboard;
-impl ViaKeyboard for {{ keyboard-name }} {}
+impl ViaKeyboard for {{ keyboard-name }}Via {}
 use rumcake::vial::VialKeyboard;
-impl VialKeyboard for {{ keyboard-name }} {
+impl VialKeyboard for {{ keyboard-name }}Via {
     const VIAL_KEYBOARD_UID: [u8; 8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this
     const VIAL_UNLOCK_COMBO: &'static [(u8, u8)] = &[(0, 0)]; // TODO: Change this
     const KEYBOARD_DEFINITION: &'static [u8] = &GENERATED_KEYBOARD_DEFINITION;
