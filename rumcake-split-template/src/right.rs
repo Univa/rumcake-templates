@@ -1,6 +1,5 @@
 #![no_main]
 #![no_std]
-#![feature(macro_metavar_expr)]
 #![feature(type_alias_impl_trait)]
 #![feature(generic_const_exprs)]
 
@@ -8,7 +7,7 @@ use defmt_rtt as _;
 use panic_probe as _;
 use rumcake::keyberon;
 use rumcake::keyboard;
-use rumcake::keyboard::{build_layout, build_standard_matrix};
+use rumcake::keyboard::build_standard_matrix;
 
 #[keyboard(split_peripheral(driver_setup_fn = setup_nrf_ble, driver_type = "nrf-ble"))]
 pub struct {{ keyboard-name }}Right;
@@ -39,9 +38,15 @@ impl KeyboardMatrix for {{ keyboard-name }}Right {
 }
 
 // Bluetooth configuration
-use rumcake::hw::mcu::BluetoothDevice;
+use rumcake::hw::platform::BluetoothDevice;
 impl BluetoothDevice for {{ keyboard-name }}Right {
     const BLUETOOTH_ADDRESS: [u8; 6] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this
+}
+
+// ADC setup required for battery level detection
+use rumcake::hw::platform::setup_adc_sampler;
+setup_adc_sampler! {
+    (timer: TIMER1, ppi_ch0: PPI_CH0, ppi_ch1: PPI_CH1) => {}
 }
 
 // Split keyboard setup
@@ -49,7 +54,7 @@ use ::rumcake::split::peripheral::{PeripheralDevice, PeripheralDeviceDriver};
 use rumcake::drivers::nrf_ble::peripheral::setup_nrf_ble_split_peripheral;
 impl PeripheralDevice for {{ keyboard-name }}Right {}
 async fn setup_nrf_ble() -> (impl PeripheralDeviceDriver, [u8; 6]) {
-    setup_nrf_ble_split_central! {
-        peripheral_addresses: [[0x00, 0x00, 0x00, 0x00, 0x00, 0x00]], // TODO: Change this, must match the left half's BLUETOOTH_ADDRESS
+    setup_nrf_ble_split_peripheral! {
+        central_address: [1, 1, 1, 1, 1, 1], // TODO: Change this, must match the left half's BLUETOOTH_ADDRESS
     }
 }

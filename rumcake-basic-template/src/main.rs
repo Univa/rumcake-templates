@@ -105,7 +105,9 @@ impl USBKeyboard for {{ keyboard-name }}  {
 // Note: since the `storage` feature flag is not enabled, changes to your keyboard in the Vial app will not be saved. If you use `storage`, be sure to update memory.x.
 struct {{ keyboard-name }}Via;
 use rumcake::via::ViaKeyboard;
-impl ViaKeyboard for {{ keyboard-name }}Via {}
+impl ViaKeyboard for {{ keyboard-name }}Via {
+    type Layout = {{ keyboard-name }};
+}
 use rumcake::vial::VialKeyboard;
 impl VialKeyboard for {{ keyboard-name }}Via {
     const VIAL_KEYBOARD_UID: [u8; 8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]; // TODO: Change this
